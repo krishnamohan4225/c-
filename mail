@@ -1,0 +1,33 @@
+public void sendEmail()
+        {
+            string email = "krishnam@gmail.com";
+            string subject = "Manhole Level Monitoring Notification";
+            System.IO.StringWriter sw = new System.IO.StringWriter();
+            // HtmlTextWriter hw = new HtmlTextWriter(sw);
+            // System.IO.StreamReader r = null
+            // r = new System.IO.StreamReader(Server.MapPath("~/ContactMail.txt"));
+            //    string body = "2 Dustbins Are filled - Area Bhagat seva ashram, time - 2/25/2017 8:37:48 PM , filled Percentage 94.68 %";
+            string body = smsBody;
+            try
+            {
+                using (MailMessage mm = new MailMessage(email, "krishna.pvkm@gmail.com"))
+                {
+                    mm.IsBodyHtml = true;
+                    mm.Subject = subject;
+                    mm.Body = body;
+                    SmtpClient smtp = new SmtpClient();
+                    smtp.Host = "smtp.gmail.com";
+                    smtp.EnableSsl = true;
+                    NetworkCredential NetworkCred = new NetworkCredential("krishna.pvkm@gmail.com", "krishnapassword");
+               
+                    smtp.UseDefaultCredentials = true;
+                    smtp.Credentials = NetworkCred;
+                    smtp.Port = 587;
+                    smtp.Send(mm);
+                }
+            }
+            catch (Exception ex)
+            {
+            }
+
+      
