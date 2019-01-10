@@ -1,0 +1,14 @@
+ public void sendsms()
+        {
+            string Msg = smsBody;
+            string ContactNo = "8686139868";
+            string strUrl = "http://send.hamarasms.com/api/sendhttp.php?authkey=142980AujH4djLH58b3a&mobiles=" + ContactNo + "&message=" + Msg + "&sender=JUSCO&route=1";
+            System.Net.WebRequest request = System.Net.HttpWebRequest.Create(strUrl);
+            System.Net.HttpWebResponse response = (System.Net.HttpWebResponse)request.GetResponse();
+            Stream s = (Stream)response.GetResponseStream();
+            StreamReader readStream = new StreamReader(s);
+            string dataString = readStream.ReadToEnd();
+            response.Close();
+            s.Close();
+            readStream.Close();
+        }
